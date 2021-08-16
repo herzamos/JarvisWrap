@@ -50,7 +50,7 @@ def generate_points(max_x, max_y):
     points = []
     for x in range(max_x//20, max_x - max_x//20):
         for y in range(max_y//20, max_y - max_y//20):
-            if (random.randint(0, 10000) > 9997):
+            if (random.randint(0, 10000) > 9996):
                 points.append(Point(x, y))
     return points
 
@@ -77,7 +77,10 @@ def run_jarvis_wrap():
     pygame.init()
     screen = pygame.display.set_mode([500, 500])
     points = generate_points(500, 500)
-    
+    start = points[0]
+
+    random.shuffle(points)
+
     to_draw = True
     running = True
     while running:
@@ -90,7 +93,7 @@ def run_jarvis_wrap():
         if (to_draw):
             for point in points:
                 pygame.draw.circle(screen, (0, 0 , 0), (point.x, point.y), 1)
-            jarvis_wrap(points[0], points, screen)
+            jarvis_wrap(start, points, screen)
             to_draw = False
         
     pygame.quit()
